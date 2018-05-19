@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 15:51:48 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/04/27 16:34:47 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/05/19 20:55:11 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*ft_strstr(const char *haystack, const char *needle)
 			i++;
 			j++;
 		}
-		if (needle[i] =='\0')
+		if (needle[i] == '\0')
 		{
 			while (k > 0)
 			{

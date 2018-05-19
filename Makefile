@@ -6,7 +6,7 @@
 #    By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/18 16:23:00 by wtaylor           #+#    #+#              #
-#    Updated: 2018/05/18 17:36:29 by wtaylor          ###   ########.fr        #
+#    Updated: 2018/05/19 21:20:39 by wtaylor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,13 +20,14 @@ SRC = ft_bzero.c ft_memcpy.c ft_memccpy.c ft_memmove.c ft_memchr.c ft_memcmp.c \
 	  ft_strequ.c ft_strnequ.c ft_strsub.c ft_strjoin.c ft_strtrim.c ft_strsplit.c \
 	  ft_itoa.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c ft_putchar_fd.c \
 	  ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
-FLAG = -Wall -Werror -Wextra -c -I
+FLAG = -Wall -Werror -Wextra -c
 
 all: $(NAME)
 
 $(NAME):
 	gcc $(FLAG) $(SRC)
 	ar rc $(NAME) *.o
+	ranlib $(NAME)
 
 clean:
 	/bin/rm -f *.o

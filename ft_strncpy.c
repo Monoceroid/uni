@@ -6,21 +6,21 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:25:46 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/04/26 12:13:11 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/05/19 20:52:10 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-char *ft_strncpy(char * dst, const char * src, int len)
+char	*ft_strncpy(char *dst, const char *src, int len)
 {
 	int		i;
 	int		j;
 	int		k;
 	int		n;
 	char	*str;
-	
+
 	i = 0;
 	while (dst[i] != '\0')
 		i++;

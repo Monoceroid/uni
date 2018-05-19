@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 12:14:06 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/04/26 14:12:42 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/05/19 20:53:18 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ unsigned int	ft_strlcat(char *dst, const char *src, unsigned int size)
 	unsigned int	j;
 	unsigned int	k;
 	unsigned int	l;
-	
+
 	i = 0;
 	while (src[i])
 		i++;

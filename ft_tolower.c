@@ -6,11 +6,11 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 15:53:12 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/04/26 15:53:50 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/05/19 16:01:14 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned char	ft_lower(int c)
+unsigned char	ft_tolower(int c)
 {
 	if (c > 64 && c < 91)
 		return (c + 32);

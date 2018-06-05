@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 17:35:45 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/06/02 17:18:05 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/06/04 17:15:43 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ int				ft_isalpha(int c);
 int				ft_isdigit(int c);
 int				ft_isalnum(int c);
 int				ft_isprint(int c);
-unsigned char	ft_toupper(int c);
-unsigned char	ft_tolower(int c);
+int				ft_toupper(int c);
+int				ft_tolower(int c);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *haystack, const char *needle);

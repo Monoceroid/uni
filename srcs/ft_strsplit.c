@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/19 19:07:12 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/05/21 18:09:50 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/06/04 20:36:28 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ char	**ft_strsplit(char const *s, char c)
 	int		k;
 	char	**arr;
 
+	if (!s)
+		return (NULL);
 	arr = (char **)malloc((ft_strlen(s)) * sizeof(arr));
-	if (arr == NULL)
+	if (!arr)
 		return (NULL);
 	i = 0;
 	j = 0;

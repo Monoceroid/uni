@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/25 13:25:46 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/06/02 16:14:52 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/06/04 20:48:49 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strncpy(char *dst, const char *src, size_t len)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (src[i] != '\0' && i < len)
 	{

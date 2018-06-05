@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/02 14:31:45 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/05/19 20:57:26 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/06/04 17:35:29 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memalloc(size_t size)
 	char	*ptr;
 
 	area = malloc(size);
+	if (area == NULL)
+		return (NULL);
 	ptr = (char *)area;
 	while (size--)
 		*ptr++ = 0;

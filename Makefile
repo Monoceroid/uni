@@ -6,13 +6,13 @@
 #    By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/18 16:23:00 by wtaylor           #+#    #+#              #
-#    Updated: 2018/05/21 19:00:29 by wtaylor          ###   ########.fr        #
+#    Updated: 2018/06/05 18:03:59 by wtaylor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
-SRC_PATH = ./srcs/
-HEAD_PATH = ./includes/
+SRC_PATH = ./
+HEAD_PATH = ./
 SRC = $(SRC_PATH)ft_bzero.c \
 	  $(SRC_PATH)ft_memcpy.c \
 	  $(SRC_PATH)ft_memccpy.c \

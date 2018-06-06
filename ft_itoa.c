@@ -5,37 +5,68 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/19 20:29:47 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/05/19 20:40:48 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/06/05 14:59:23 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/06/06 16:25:38 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_itoa(int n)
+static int	length(int a)
 {
-	int		o;
-	size_t	size;
-	char	*s;
-	size_t	i;
+	int	l;
 
+	l = 0;
+	if (a == 0)
+		return (1);
+	while (a > 0)
+	{
+		a = a / 10;
+		l++;
+	}
+	return (l);
+}
+
+static int	power(int a)
+{
+	int	b;
+
+	if (a == 0)
+		return (1);
+	b = 10;
+	while (a > 1)
+	{
+		b = b * 10;
+		a--;
+	}
+	return (b);
+}
+
+char		*ft_itoa(int n)
+{
+	int		i;
+	int		l;
+	char	*s;
+
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
 	if (n < 0)
-		o = n * -1;
+	{
+		n = n * -1;
+		l = length(n);
+		if ((s = ft_strnew(l + 1)) == NULL)
+			return (NULL);
+		s[0] = ('-');
+		i = 1;
+	}
 	else
-		o = n;
-	size = 0;
-	while (o >= 1)
 	{
-		o = o / 10;
-		size++;
+		l = length(n);
+		if ((s = ft_strnew(l)) == NULL)
+			return (NULL);
+		i = 0;
 	}
-	s = ft_strnew((size + 1) * sizeof(s));
-	i = size;
-	while (i > 0)
-	{
-		s[i] = n % 10;
-		n = n / 10;
-		i--;
-	}
+	while (--l >= 0)
+		s[i++] = ((n / power(l)) % 10 + 48);
 	return (s);
 }

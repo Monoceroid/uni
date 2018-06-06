@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit.c                                      :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/19 19:07:12 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/06/04 20:36:28 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/04/26 14:01:13 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/06/05 18:14:32 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-char	**ft_strsplit(char const *s, char c)
+int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 {
-	int		i;
-	int		j;
-	int		k;
-	char	**arr;
+	unsigned int	i;
 
-	if (!s)
-		return (NULL);
-	arr = (char **)malloc((ft_strlen(s)) * sizeof(arr));
-	if (!arr)
-		return (NULL);
+	if (n == 0)
+		return (0);
 	i = 0;
-	j = 0;
-	k = 0;
-	while (s[i] != '\0')
-	{
-		while (s[i] == c)
-			i++;
-		while (s[i++] != c)
-			arr[j][k++] = s[i];
-		j++;
-	}
-	return (arr);
+	while (s1[i] != '\0' && s2[i] != '\0' && i < n - 1 && s1[i] == s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

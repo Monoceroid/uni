@@ -26,20 +26,15 @@ int	*check_count(int fd)
 	buffer = 'a';
 	pos = 0;
 	lines = 0;
-	while (buffer != '\0')
+	while (read(fd, &buffer, 1) != 0)
 	{
-		read(fd, &buffer, 1);
+		printf("Buffer: %c %d\n", buffer, buffer);
 		pos++;
-		if (pos > 21)
-			return (NULL);
-		printf("%d\n", pos);
-		if (pos % 5 != 0)
+		printf("Position: %d\n", pos);
+		if (pos % 5 != 0 && pos != 21)
 		{
-			if ((pos - 1) % 20 != 0)
-			{
-				if (buffer != '.' && buffer != '#')
-					return (NULL);
-			}
+			if (buffer != '.' && buffer != '#')
+				return (NULL);
 		}
 		else
 		{
@@ -48,11 +43,9 @@ int	*check_count(int fd)
 		}
 		if (pos == 21)
 		{
-			if (buffer == '\n')
-			{
-				lines++;
-				pos = 0;
-			}
+			lines += 4;
+			printf("Lines: %d\n", lines);
+			pos = 0;
 		}
 	}
 	printf("%d\n", lines);

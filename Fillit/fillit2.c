@@ -16,6 +16,33 @@
 #include <sys/stat.h>
 #include <stdio.h>
 
+int	*valid_tets()
+{
+	char	*s;
+	int	tets[19][4];
+
+	s = "1,2,3,4,1,5,9,13,1,2,3,7,2,6,9,10,1,5,6,7,1,2,5,9,1,5,6,10,2,3,5,6,1,2,3,6,2,5,6,10,2,5,6,7,1,5,6,9,1,2,5,6,2,5,6,9,1,2,6,7,1,2,3,5,1,2,6,10,3,5,6,7,1,5,9,10,";
+	return (tets = ft_arrstr(s, ',', 19, 4));
+}
+
+int	*store_check(int fd, int *arr)
+{
+	char	buffer;
+	int		pos;
+	int		valid[19][4];
+
+	pos = 0;
+	valid = ;
+	while (read(fd, &buffer, 1) != 0)
+	{
+		pos++;
+		if (buffer == '#')
+			*arr++ = pos;
+		if (pos == 16)
+			pos = 0;
+	}
+}
+
 int	*check_count(int fd)
 {
 	char	buffer;
@@ -56,6 +83,8 @@ int	*check_count(int fd)
 int	main(int argc, char **argv)
 {
 	int		fd;
+	int		*arr;
+	int		*tets;
 
 	if (argc != 2)
 	{
@@ -63,12 +92,18 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
-	if (check_count(fd) == NULL)
+	if (arr = check_count(fd) == NULL)
 	{
 		ft_putstr("error");
 		ft_putchar('\n');
 		return (0);
 	}
+//	if (tets = store_check(fd, arr) == NULL)
+//	{
+//		ft_putstr("error");
+//		ft_putchar('\n');
+//		return (0);
+//	}
 	close(fd);
 	return (0);
 }

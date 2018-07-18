@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 17:35:45 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/06/04 17:15:43 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/18 14:52:33 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 char			*ft_itoa(int n);
+int 			*ft_arrstr(char *str, char c, int size);
 
 #endif

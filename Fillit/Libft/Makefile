@@ -6,7 +6,7 @@
 #    By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/05/18 16:23:00 by wtaylor           #+#    #+#              #
-#    Updated: 2018/06/05 18:03:59 by wtaylor          ###   ########.fr        #
+#    Updated: 2018/07/18 12:12:34 by wtaylor          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,6 +65,7 @@ SRC = $(SRC_PATH)ft_bzero.c \
 	  $(SRC_PATH)ft_putendl_fd.c \
 	  $(SRC_PATH)ft_putnbr_fd.c \
 	  $(SRC_PATH)ft_memset.c
+	  $(SRC_PATH)ft_arrstr.c
 
 FLAG = -Wall -Werror -Wextra -c -I $(HEAD_PATH)
 

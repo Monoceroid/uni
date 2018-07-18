@@ -6,11 +6,13 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 10:27:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/18 15:15:32 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/18 14:50:38 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+//#include "libft.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 int	*ft_arrstr(char *str, char c, int size)
 {
@@ -31,4 +33,15 @@ int	*ft_arrstr(char *str, char c, int size)
 		str++;
 	}
 	return (p2);
+}
+
+int main(void)
+{
+	char	*s = "1,12,6,3,8,14,7,6,";
+	int		*p = ft_arrstr(s, ',', 8);
+	int		i = 0;
+
+	while (i++ < 8)
+		printf("%d, ", *p++);
+	return (0);
 }

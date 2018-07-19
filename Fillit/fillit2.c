@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/18 15:15:30 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/19 13:28:36 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,83 @@
 int	*valid_tets(void)
 {
 	char	*s;
-	int	*tets;
-	int	i = 0;
+	int		*tets;
+	//	int	i = 0;
 
 	s = "1,2,3,4,1,5,9,13,1,2,3,7,2,6,9,10,1,5,6,7,1,2,5,9,1,5,6,10,2,3,"
 		"5,6,1,2,3,6,2,5,6,10,2,5,6,7,1,5,6,9,1,2,5,6,2,5,6,9,1,2,6,7,1,"
-		"2,3,5,1,2,6,10,3,5,6,7,1,5,9,10,";
-	printf("%s", s);
-//	tets = ft_arrstr(s, ',', 76);
-//	while (i < 76)
-//		printf("%d, ", *tets++);
+		"2,3,5,1,2,6,10,3,5,6,7,1,5,9,10,0,";
+	//	printf("%s\n", s);
+	tets = ft_arrstr(s, ',', 77);
+	//	while (i++ < 76)
+	//		printf("%d, ", *tets++);
 	return (tets);
 }
 
-//int	*store_check(int fd, int *arr)
-//{
-//	char	buffer;
-//	int		pos;
-//	int		valid[19][4];
-//
-//	pos = 0;
-//	valid = ;
-//	while (read(fd, &buffer, 1) != 0)
-//	{
-//		pos++;
-//		if (buffer == '#')
-//			*arr++ = pos;
-//		if (pos == 16)
-//			pos = 0;
-//	}
-//}
+int	*store_check(int fd, int *actual)
+{
+	char	buffer;
+	int		pos;
+	int*	valid;
+	int		acount;
+	int		vcount;
+	int		i = 0;
+
+	pos = 1;
+	acount = 0;
+	vcount = 0;
+	valid = valid_tets();
+	//	while (i++ < 77)
+	//		printf("%d\n, ", *valid++);
+	while (i++ < 77)
+	{
+		printf("%d, ", *actual++);
+		acount++;
+	}
+	actual -= acount;
+	acount = 0;
+	i = 0;
+	printf("\n\n");
+	while (read(fd, &buffer, 1) != 0)
+	{
+		printf("%d%c ", pos, buffer);
+		if (buffer == '#')
+		{
+			*actual++ = pos++;
+			acount++;
+		}
+		if (buffer == '.')
+			pos++;
+		if (pos == 17)
+			pos = 1;
+	}
+	actual -= acount;
+	while (i++ < 77)
+		printf("%d, ", *actual++);
+	while (*actual != 0)
+	{
+		pos = 0;
+		while (*valid != 0)
+		{
+			if (*actual == *valid && *(actual + 1) == *(actual + 1) && *(actual + 2) == *(actual + 2) && *(actual + 3) == *(valid + 3))
+			{	
+				actual += 4;
+				acount += 4;
+				pos = 1;
+			}
+			else
+			{
+				valid += 4;
+				vcount += 4;
+			}
+		}
+		if (pos != 1)
+			return (NULL);
+		valid -= vcount;
+	}
+	actual -= acount;
+	return (actual);
+}
 
 int	*check_count(int fd)
 {
@@ -62,9 +109,9 @@ int	*check_count(int fd)
 	lines = 0;
 	while (read(fd, &buffer, 1) != 0)
 	{
-//		printf("Buffer: %c %d\n", buffer, buffer);
+		//		printf("Buffer: %c %d\n", buffer, buffer);
 		pos++;
-//		printf("Position: %d\n", pos);
+		//		printf("Position: %d\n", pos);
 		if (pos % 5 != 0 && pos != 21)
 		{
 			if (buffer != '.' && buffer != '#')
@@ -78,12 +125,12 @@ int	*check_count(int fd)
 		if (pos == 21)
 		{
 			lines += 4;
-//			printf("Lines: %d\n", lines);
+			//			printf("Lines: %d\n", lines);
 			pos = 0;
 		}
 	}
-//	printf("%d\n", lines);
-	arr = (int *)malloc(lines * sizeof(int));
+	//	printf("%d\n", lines);
+	arr = (int *)malloc((lines + 1) * sizeof(int));
 	return (arr);
 }
 
@@ -105,13 +152,14 @@ int	main(int argc, char **argv)
 		ft_putchar('\n');
 		return (0);
 	}
-	tets = valid_tets();
-//	if ((tets = store_check(fd, arr)) == NULL)
-//	{
-//		ft_putstr("error");
-//		ft_putchar('\n');
-//		return (0);
-//	}
+	close (fd);
+	fd = open(argv[1], O_RDONLY);
+	if ((tets = store_check(fd, arr)) == NULL)
+	{
+		ft_putstr("error");
+		ft_putchar('\n');
+		return (0);
+	}
 	close(fd);
 	return (0);
 }

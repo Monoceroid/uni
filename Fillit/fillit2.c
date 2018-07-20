@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/19 17:21:35 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/20 09:44:50 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	*store_check(int fd, int *actual)
 		pos = 0;
 		while (*valid != 0)
 		{
-			if (*actual == *valid && *(actual + 1) == *(actual + 1) && *(actual + 2) == *(actual + 2) && *(actual + 3) == *(valid + 3))
+			if (*actual == *valid && *(actual + 1) == *(valid + 1) && *(actual + 2) == *(valid + 2) && *(actual + 3) == *(valid + 3))
 			{	
 				actual += 4;
 				acount += 4;

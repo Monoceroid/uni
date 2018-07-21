@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/20 10:14:35 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/20 10:40:24 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,7 @@ int	main(int argc, char **argv)
 		ft_putchar('\n');
 		return (0);
 	}
+	printf("%d\n", tets[16]);
 	close(fd);
 	return (0);
 }

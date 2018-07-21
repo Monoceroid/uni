@@ -1,46 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_12arr.c                                         :+:      :+:    :+:   */
+/*   ft_arrdiff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/21 11:13:45 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/21 13:53:00 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/07/21 13:54:47 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/07/21 14:20:54 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
-int	**ft_12arr(int *p, int m, int n)
+int	ft_arrdiff(int **p, int m, int n)
 {
 	int	i;
-	int	j;
-	int	k;
-	int	**a;
+	int	x;
+	int **q;
 
 	i = 0;
-	j = 0;
-	k = 0;
-	a = (int **)malloc(sizeof(int *) * (m / n));
-	a[0] = (int *)malloc(sizeof(int) * m);
-	while (i < (m / n))
+	x = 1;
+	q = p;
+	while (i < (m * n))
 	{
-		a[i] = a[0] + n * i;
-		i++;
-	}
-	i = 0;
-	while (i < (m / n))
-	{
-		while (j < n)
+		while (x < (m * n - x + 1 - (p - q)))
 		{
-			a[i][j] = p[k];
-			j++;
-			k++;
+			if (**p == **(p + x))
+				return (0);
+			x++;
 		}
-		i++;
-		j = 0;
+		p++;
 	}
-	free(p);
-	return (a);	
+	return (1);
+}
+
+int	main(void)
+{
+	int	arr[2][3] = {{1, 5, 3},{8, 2, 6}};
+	int	**p;
+
+	p = arr;	
+	printf("%d", ft_arrdiff(p, 2, 3));
+	return (0);
 }

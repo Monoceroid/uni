@@ -6,12 +6,26 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 13:54:47 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/22 12:55:04 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/22 13:06:09 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+
+static	int	central_loop(int **p, int r, int c)
+{
+	while (++i < r)
+	{
+		while (++j < c)
+		{
+			if (p[x][y] == p[i][j])
+				return (0);
+		}
+		j = -1;
+	}
+	return (1);
+}
 
 int	ft_arrdiff(int **p, int r, int c)
 {
@@ -67,7 +81,7 @@ int	main(void)
 	for (i = 0; i < r; i++)
 		for (j = 0; j < c; j++)
 			arr[i][j] = ++count;
-//	arr[0][1] = 10;
+	//	arr[0][1] = 10;
 	for (i = 0; i <  r; i++)
 		for (j = 0; j < c; j++)
 			printf("%d ", arr[i][j]);

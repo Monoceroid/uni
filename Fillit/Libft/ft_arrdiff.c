@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/21 13:54:47 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/21 14:20:54 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/22 10:00:14 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,20 @@ int	ft_arrdiff(int **p, int m, int n)
 
 int	main(void)
 {
-	int	arr[2][3] = {{1, 5, 3},{8, 2, 6}};
-	int	**p;
 
-	p = arr;	
-	printf("%d", ft_arrdiff(p, 2, 3));
+	int r=3, c=4;
+	int **arr;
+	int count = 0,i,j;
+
+	arr  = (int **)malloc(sizeof(int *) * r);
+	arr[0] = (int *)malloc(sizeof(int) * c * r);
+
+	for(i = 0; i < r; i++)
+		arr[i] = (*arr + c * i);
+
+	for (i = 0; i < r; i++)
+		for (j = 0; j < c; j++)
+			arr[i][j] = ++count;
+	printf("%d", ft_arrdiff(arr, 3, 4));
 	return (0);
 }

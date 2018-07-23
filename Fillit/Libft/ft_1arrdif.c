@@ -6,31 +6,31 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 10:47:19 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/23 11:19:31 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/23 11:50:19 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-int	ft_arrdif(int *p, int n)
+int	ft_1arrdif(int *p, int n)
 {
 	int	res;
 	int	x;
 
 	res = 1;
 	x = 0;
-	while (x++ < n)
+	if (n == 1)
+		return (res);
+	while (++x < n)
 	{
-		if (*p == *(p +  1 + x))
+		if (*p == *(p + x))
 			res = 0;
 	}
 	if (res == 0)
 		return (res);
-	if (n == 0)
-		return (res);
-	else
-		res = ft_arrdif(p + 1, n - 1);
+		else
+		res = ft_1arrdif(p + 1, n - 1);
 	return (res);
 }
 
@@ -48,10 +48,10 @@ int	main(void)
 	i = 0;
 	while (i < 12)
 		arr[i++] = count++;
-	arr[2] = 10;
+	arr[10] = 12;
 	i = 0;
 	while (i < 12)
 		printf("%d ", arr[i++]);
-	printf("\n%d", ft_arrdif(arr, 12));
+	printf("\n%d", ft_1arrdif(arr, 12));
 	return (0);
 }

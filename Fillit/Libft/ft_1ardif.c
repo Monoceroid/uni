@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 12:39:43 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/23 12:49:41 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/23 12:54:45 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_1ardif(int *p, int *q, int n, int count)
 		x = 0;
 	else
 		x = -1;
-	if (count == 1)
+	if (count == 0)
 		return (res);
 	while (++x < n)
 	{
@@ -52,17 +52,17 @@ int	main(void)
 	i = 0;
 	while (i < 12)
 		p[i++] = count++;
-	i = 0;
-	while (i < 12)
-		printf("%d ", p[i++]);
 	q  = (int *)malloc(sizeof(int ) * n);
 	count = 13;
 	i = 0;
 	while (i < 12)
 		q[i++] = count++;
-	q[10] = 8;
+	q[11] = 12;
 	i = 0;
+	while (i < 12)
+		printf("%d ", p[i++]);
 	printf("\n");
+	i = 0;
 	while (i < 12)
 		printf("%d ", q[i++]);
 	printf("\n%d", ft_1ardif(p, q, 12, 12));

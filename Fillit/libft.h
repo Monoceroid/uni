@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 17:35:45 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/21 13:12:45 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/23 13:58:29 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ char			**ft_strsplit(char const *s, char c);
 char			*ft_itoa(int n);
 int 			*ft_arrstr(char *str, char c, int size);
 int             **ft_12arr(int *p, int m, int n);
+int             ft_1arrdif(int *p, int n);
+int             ft_1ardif(int *p, int *q, int n, int count);
+int             ft_2ardif(int **a, int r, int c);
 
 #endif

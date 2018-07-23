@@ -6,11 +6,12 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 12:56:56 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/23 14:07:03 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/23 14:06:21 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 int	ft_2ardif(int **a, int r, int c)
 {
@@ -31,4 +32,41 @@ int	ft_2ardif(int **a, int r, int c)
 	else
 		res = ft_2ardif(a + 1, r - 1, c);
 	return (res);
+}
+
+int	main(void)
+{
+	int	i;
+	int	j;
+	int	count;
+	int **a;
+
+	a = (int **)malloc(sizeof(int *) * 4);
+	a[0] = (int *)malloc(sizeof(int) * 16);
+	i = -1;
+	while (++i < 4)
+		a[i] = a[0] + 4 * i;
+	count = 1;
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+		{
+			a[i][j] = count++;
+		}
+	}
+	a[3][2] = 16;
+	i = -1;
+	while (++i < 4)
+	{
+		j = -1;
+		while (++j < 4)
+		{
+			printf("%d, ", a[i][j]);
+		}
+		printf("\n");
+	}
+	printf("%d", ft_2ardif(a, 4, 4));
+	return (0);
 }

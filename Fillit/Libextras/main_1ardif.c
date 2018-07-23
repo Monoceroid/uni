@@ -6,11 +6,12 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/23 12:39:43 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/23 14:05:03 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/23 14:03:43 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 int	ft_1ardif(int *p, int *q, int n, int count)
 {
@@ -33,4 +34,37 @@ int	ft_1ardif(int *p, int *q, int n, int count)
 	else
 		res = ft_1ardif(p + 1, q, n, count - 1);
 	return (res);
+}
+
+int	main(void)
+{
+
+	int n;
+	int *p;
+	int	*q;
+	int count;
+	int	i;
+
+	n = 12;
+	p  = (int *)malloc(sizeof(int ) * n);
+	count = 1;
+	i = 0;
+	while (i < 12)
+		p[i++] = count++;
+	q  = (int *)malloc(sizeof(int ) * n);
+	count = 13;
+	i = 0;
+	while (i < 12)
+		q[i++] = count++;
+	q[11] = 12;
+//	q = p;
+	i = 0;
+	while (i < 12)
+		printf("%d ", p[i++]);
+	printf("\n");
+	i = 0;
+	while (i < 12)
+		printf("%d ", q[i++]);
+	printf("\n%d", ft_1ardif(p, q, 12, 12));
+	return (0);
 }

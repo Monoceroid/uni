@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/24 14:50:37 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/20 10:40:24 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <stdio.h>
-
-//int	**fillit(int **a, int n)
-//{
-//	
-//}
 
 int	*valid_tets(void)
 {
@@ -102,7 +97,7 @@ int	*store_check(int fd, int *actual)
 	return (actual);
 }
 
-int	*check_count(int fd, int *n)
+int	*check_count(int fd)
 {
 	char	buffer;
 	int		pos;
@@ -139,7 +134,6 @@ int	*check_count(int fd, int *n)
 		}
 	}
 	arr = (int *)malloc((lines + 1) * sizeof(int));
-	*n = lines / 4;
 	return (arr);
 }
 
@@ -148,7 +142,6 @@ int	main(int argc, char **argv)
 	int		fd;
 	int		*arr;
 	int		*tets;
-	int		n;
 
 	if (argc != 2)
 	{
@@ -156,7 +149,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
-	if ((arr = check_count(fd, &n)) == NULL)
+	if ((arr = check_count(fd)) == NULL)
 	{
 		ft_putstr("error");
 		ft_putchar('\n');
@@ -170,9 +163,7 @@ int	main(int argc, char **argv)
 		ft_putchar('\n');
 		return (0);
 	}
-//	fillit(tets, n);
 	printf("%d\n", tets[16]);
-	printf("%d\n", n);
 	close(fd);
 	return (0);
 }

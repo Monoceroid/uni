@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/24 14:50:37 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/25 11:41:02 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,48 @@
 #include <sys/stat.h>
 #include <stdio.h>
 
-//int	**fillit(int **a, int n)
-//{
-//	
-//}
+typedef	struct	s_tet
+{
+		int	cdif1;
+		int cdif2;
+		int cdif3;
+}				c_tet;
 
+c_tet	tet_struct(int *a, int l)
+{
+	c_tet	tet;
+	
+	tet.cdif1 = ((a[1] - 1) % l) - ((a[0] - 1) % l);
+	tet.cdif2 = ((a[2] - 1) % l) - ((a[1] - 1) % l);	
+	tet.cdif3 = ((a[3] - 1) % l) - ((a[2] - 1) % l);
+	return (tet);
+}
+/*
+void	zero_tet(int *a, int l)
+{
+
+	if (new_struct != old_struct)
+}
+
+void	zero_all(int **a, int n, int l)
+{
+	int	i;
+
+	i = -1;
+	while (++i < n)
+		zero_tet(*a++);
+}
+
+int	**fillit(int **a, int n)
+{
+	int	l;
+
+	l = 4;
+	while (l * l < 4 * n)
+		l++;
+	zero_all(a, n, l);
+}
+*/
 int	*valid_tets(void)
 {
 	char	*s;
@@ -171,8 +208,9 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 //	fillit(tets, n);
-	printf("%d\n", tets[16]);
-	printf("%d\n", n);
+//	printf("%d\n", tets[16]);
+	printf("Number of tets: %d\n", n);
+	printf("cdif1: %d\n", (tet_struct(tets, 4)).cdif1);
 	close(fd);
 	return (0);
 }

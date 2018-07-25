@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/25 15:45:09 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/25 16:11:36 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	zero_tet(int *a, int l)
 	c_tet	old_struct;
 
 	old_struct = tet_struct(a, l);
-	printf("old_struct.cdif1: %d\n", old_struct.cdif1);
+	printf("a[0]: %d, a[1]: %d, a[2]: %d, a[3]: %d\n", a[0], a[1], a[2], a[3]);
 	while (a[0] > 1)
 	{
 		a[0]--;
@@ -46,14 +46,16 @@ void	zero_tet(int *a, int l)
 		a[2]--;
 		a[3]--;
 	}
-	while (tet_struct(a, 4).cdif1 != old_struct.cdif1 || tet_struct(a, 4).cdif2 != 
-			old_struct.cdif2 || tet_struct(a, 4).cdif3 != old_struct.cdif3 )
+	printf("a[0]: %d, a[1]: %d, a[2]: %d, a[3]: %d\n", a[0], a[1], a[2], a[3]);
+	while (tet_struct(a, l).cdif1 != old_struct.cdif1 || tet_struct(a, l).cdif2 != 
+			old_struct.cdif2 || tet_struct(a, l).cdif3 != old_struct.cdif3)
 	{
 		a[0]++;
 		a[1]++;
 		a[2]++;
 		a[3]++;
 	}
+	printf("a[0]: %d, a[1]: %d, a[2]: %d, a[3]: %d\n", a[0], a[1], a[2], a[3]);
 }
 
 void	zero_all(int **a, int n, int l)
@@ -63,7 +65,7 @@ void	zero_all(int **a, int n, int l)
 	i = -1;
 	while (++i < n)
 	{
-		printf("i: %d\n", i);
+		printf("i: %d, l: %d\n", i, l);
 		zero_tet(a[i], l);
 	}	
 }
@@ -87,12 +89,12 @@ void	upsize_tet(int *a, int l, int init_l)
 				x++;
 			}
 			a[i] += count;
-			printf("a[%d]: %d\n", i, a[i]);
+//			printf("a[%d]: %d\n", i, a[i]);
 			x = 1;
 			count = 0;
 		}
 		init_l++;
-		printf("init_l: %d\n", init_l);
+//		printf("init_l: %d\n", init_l);
 	}
 }
 
@@ -114,8 +116,9 @@ int	**fillit(int **a, int n)
 	init_l = l;
 	while (l * l < 4 * n)
 		l++;
-	printf("l: %d, init_l: %d, n: %d\n", l, init_l, n);
+	printf("a[0][1]: %d, l: %d, init_l: %d, n: %d\n", a[0][1], l, init_l, n);
 	upsize_all(a, l, init_l, n);
+	printf("a[0][1]: %d, n: %d, l: %d\n", a[0][1], n, l);
 	zero_all(a, n, l);
 	return (a);
 }

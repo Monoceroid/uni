@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/25 12:12:50 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/25 12:29:42 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	zero_tet(int *a, int l)
 	c_tet	old_struct;
 
 	old_struct = tet_struct(a, l);
-	printf("Old_struct cdif1: %d\n", old_struct.cdif1);
 	while (a[0] > 1)
 	{
 		a[0]--;
@@ -55,16 +54,16 @@ void	zero_tet(int *a, int l)
 		a[3]++;
 	}
 }
-/*
+
 void	zero_all(int **a, int n, int l)
 {
 	int	i;
 
 	i = -1;
 	while (++i < n)
-		zero_tet(*a++);
+		zero_tet(a[i], l);
 }
-
+/*
 int	**fillit(int **a, int n)
 {
 	int	l;
@@ -203,6 +202,7 @@ int	main(int argc, char **argv)
 	int		*arr;
 	int		*tets;
 	int		n;
+	int		**testvariable;
 
 	if (argc != 2)
 	{
@@ -228,8 +228,12 @@ int	main(int argc, char **argv)
 //	printf("%d\n", tets[16]);
 	printf("Number of tets: %d\n", n);
 //	printf("cdif1: %d\n", (tet_struct(tets, 4)).cdif1);
-	zero_tet(tets, 4);	
-	printf("Zeroed tet element: %d\n", tets[0]);
+//	zero_tet(tets, 4);	
+//	printf("Zeroed tet element: %d\n", tets[0]);
+	testvariable = ft_12arr(tets, 16, 4);
+	printf("Unzeroed tet[2][1]: %d\n", testvariable[2][1]); 
+	zero_all(testvariable, 4, 4);
+	printf("Zeroed tet[2][1]: %d\n", testvariable[2][1]); 
 	close(fd);
 	return (0);
 }

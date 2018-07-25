@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/25 11:41:02 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/25 12:12:50 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,30 @@ c_tet	tet_struct(int *a, int l)
 	tet.cdif3 = ((a[3] - 1) % l) - ((a[2] - 1) % l);
 	return (tet);
 }
-/*
+
 void	zero_tet(int *a, int l)
 {
+	c_tet	old_struct;
 
-	if (new_struct != old_struct)
+	old_struct = tet_struct(a, l);
+	printf("Old_struct cdif1: %d\n", old_struct.cdif1);
+	while (a[0] > 1)
+	{
+		a[0]--;
+		a[1]--;
+		a[2]--;
+		a[3]--;
+	}
+	while (tet_struct(a, 4).cdif1 != old_struct.cdif1 || tet_struct(a, 4).cdif2 != 
+			old_struct.cdif2 || tet_struct(a, 4).cdif3 != old_struct.cdif3 )
+	{
+		a[0]++;
+		a[1]++;
+		a[2]++;
+		a[3]++;
+	}
 }
-
+/*
 void	zero_all(int **a, int n, int l)
 {
 	int	i;
@@ -210,7 +227,9 @@ int	main(int argc, char **argv)
 //	fillit(tets, n);
 //	printf("%d\n", tets[16]);
 	printf("Number of tets: %d\n", n);
-	printf("cdif1: %d\n", (tet_struct(tets, 4)).cdif1);
+//	printf("cdif1: %d\n", (tet_struct(tets, 4)).cdif1);
+	zero_tet(tets, 4);	
+	printf("Zeroed tet element: %d\n", tets[0]);
 	close(fd);
 	return (0);
 }

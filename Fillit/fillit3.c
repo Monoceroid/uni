@@ -6,15 +6,12 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/31 10:34:53 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/31 11:48:37 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "fillit.h"
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <stdio.h>
 
 c_tet	tet_struct(int *a, int l)
@@ -119,8 +116,6 @@ int		**fillit(int **a, int n)
 
 int		main(int argc, char **argv)
 {
-	int		fd;
-	int		*arr;
 	int		*tets;
 	int		n;
 	int		**testvariable;
@@ -130,16 +125,7 @@ int		main(int argc, char **argv)
 		ft_putstr("usage: fillit file_name");
 		return (0);
 	}
-	fd = open(argv[1], O_RDONLY);
-	if ((arr = check_count(fd, &n)) == NULL)
-	{
-		ft_putstr("error");
-		ft_putchar('\n');
-		return (0);
-	}
-	close(fd);
-	fd = open(argv[1], O_RDONLY);
-	if ((tets = store_check(fd, arr)) == NULL)
+	if ((tets = validate(&n, argv)) == NULL)
 	{
 		ft_putstr("error");
 		ft_putchar('\n');
@@ -154,6 +140,5 @@ int		main(int argc, char **argv)
 	printf("Unzeroed tet[2][1]: %d\n", testvariable[2][1]);
 	testvariable = fillit(testvariable, n);
 	printf("Zeroed tet[2][1]: %d\n", testvariable[2][1]);
-	close(fd);
 	return (0);
 }

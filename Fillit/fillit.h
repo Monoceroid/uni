@@ -1,3 +1,7 @@
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
 typedef struct  s_tet
 {
 	    int cdif1;
@@ -5,5 +9,4 @@ typedef struct  s_tet
 			    int cdif3;
 }               c_tet;
 
-int *store_check(int fd, int *actual);
-int *check_count(int fd, int *n);
+int *validate(int *n, char **argv);

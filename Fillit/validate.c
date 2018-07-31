@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 10:22:50 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/31 12:11:42 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/31 12:22:26 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,32 +94,17 @@ static	int	*store_check(int fd, int *actual)
 	return (actual);
 }
 
-static	int	*check_count(int fd, int *n, int hash, int pos)
+static	int	*check_count(int fd, int *n, int pos)
 {
 	char	buffer;
 
 	while (read(fd, &buffer, 1) != 0)
 	{
 		pos++;
-		if (pos % 5 != 0 && pos != 21)
-		{
-			if (buffer != '.' && buffer != '#')
-				return (NULL);
-			if (buffer == '#')
-				hash++;
-		}
-		else
-		{
-			if (buffer != '\n')
-				return (NULL);
-		}
 		if (pos == 21)
 		{
 			(*n)++;
-			if (hash != 4)
-				return (NULL);
 			pos = 0;
-			hash = 0;
 		}
 	}
 	return ((int *)malloc((*n * 4 + 1) * sizeof(int)));
@@ -131,7 +116,7 @@ int			*validate(int *n, char **argv)
 	int	*arr;
 
 	fd = open(argv[1], O_RDONLY);
-	arr = check_count(fd, n, 0, 0);
+	arr = check_count(fd, n, 0);
 	if (arr == NULL)
 		return (arr);
 	close(fd);

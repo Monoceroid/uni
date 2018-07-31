@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 10:22:50 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/31 12:22:26 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/31 13:57:43 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,10 +94,40 @@ static	int	*store_check(int fd, int *actual)
 	return (actual);
 }
 
-static	int	*check_count(int fd, int *n, int pos)
+static	int	initial_check(int fd, char buffer, int hash, int pos)
+{
+	while (read(fd, &buffer, 1) != 0)
+	{
+		pos++;
+		if (pos % 5 != 0 && pos != 21)
+		{
+			if (buffer != '.' && buffer != '#')
+				return (0);
+			if (buffer == '#')
+				hash++;
+		}
+		else
+		{
+			if (buffer != '\n')
+				return (0);
+		}
+		if (pos == 21)
+		{
+			if (hash != 4)
+				return (0);
+			pos = 0;
+			hash = 0;
+		}
+	}
+	return (1);
+}
+
+static	int	*count(int fd, int *n, char **argv)
 {
 	char	buffer;
+	int		pos;
 
+	pos = 0;
 	while (read(fd, &buffer, 1) != 0)
 	{
 		pos++;
@@ -107,7 +137,12 @@ static	int	*check_count(int fd, int *n, int pos)
 			pos = 0;
 		}
 	}
-	return ((int *)malloc((*n * 4 + 1) * sizeof(int)));
+	close(fd);
+	fd = open(argv[1], O_RDONLY);
+	if (initial_check(fd, 'a', 0, 0) == 0)
+		return (NULL);
+	else
+		return ((int *)malloc((*n * 4 + 1) * sizeof(int)));
 }
 
 int			*validate(int *n, char **argv)
@@ -116,7 +151,7 @@ int			*validate(int *n, char **argv)
 	int	*arr;
 
 	fd = open(argv[1], O_RDONLY);
-	arr = check_count(fd, n, 0);
+	arr = count(fd, n, argv);
 	if (arr == NULL)
 		return (arr);
 	close(fd);

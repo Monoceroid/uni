@@ -9,4 +9,5 @@ typedef struct  s_tet
 			    int cdif3;
 }               c_tet;
 
-int *validate(int *n, char **argv);
+int		*validate(int *n, char **argv);
+void	zero_all(int **a, int n, int l);

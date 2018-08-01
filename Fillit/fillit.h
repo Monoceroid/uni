@@ -11,3 +11,5 @@ typedef struct  s_tet
 
 int		*validate(int *n, char **argv);
 void	zero_all(int **a, int n, int l);
+void	upsize_tet(int *a, int l, int init_l);
+void	upsize_all(int **a, int l, int init_l, int n);

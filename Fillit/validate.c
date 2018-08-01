@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/31 10:22:50 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/31 13:57:43 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/07/31 14:08:50 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,12 @@ static	int	*store_check(int fd, int *actual)
 	return (actual);
 }
 
+/*
+**	Performs an initial check of the input file, returning 0 if there
+**	are any forbidden/misplaced characters or if there are not the right
+**	number of hashes in each tetrimino. Returns 1 if those tests are passed.
+*/
+
 static	int	initial_check(int fd, char buffer, int hash, int pos)
 {
 	while (read(fd, &buffer, 1) != 0)
@@ -121,6 +127,12 @@ static	int	initial_check(int fd, char buffer, int hash, int pos)
 	}
 	return (1);
 }
+
+/*
+**	Counts the number of tetriminos, modifying that number via a pointer
+**	so it is available elsewhere, and returns a pointer to an array the
+**	right size to store the tetriminos in.
+*/
 
 static	int	*count(int fd, int *n, char **argv)
 {

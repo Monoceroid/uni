@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 10:55:08 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/01 11:47:09 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/01 14:16:44 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	increment_tet(int *t, int l)
 	int		i;
 	c_tet	old_struct;
 
+//	printf("Input tet: %d %d %d %d\n", t[0], t[1], t[2], t[3]);
 	old_struct = tet_struct(t, l);
 	i = -1;
 	while (++i < 4)
@@ -31,4 +32,5 @@ void	increment_tet(int *t, int l)
 		t[2]++;
 		t[3]++;
 	}
+//	printf("Incremented tet: %d %d %d %d\n", t[0], t[1], t[2], t[3]);
 }

@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/01 10:40:30 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/01 12:31:46 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ int		**fillit(int **a, int n)
 	init_l = l;
 	while (l * l < 4 * n)
 		l++;
-//	printf("a[0][1]: %d, l: %d, init_l: %d, n: %d\n", a[0][1], l, init_l, n);
 	upsize_all(a, l, init_l, n);
-//	printf("a[0][1]: %d, n: %d, l: %d\n", a[0][1], n, l);
 	zero_all(a, n, l);
+//	while (overlap(a[1], a[0]) != 0)
+//		increment_tet(a[1]);
 	return (a);
 }
 
@@ -35,6 +35,7 @@ int		main(int argc, char **argv)
 	int		*tets;
 	int		n;
 	int		**testvariable;
+	int		i;
 
 	if (argc != 2)
 	{
@@ -53,8 +54,25 @@ int		main(int argc, char **argv)
 	//	zero_tet(tets, 4);
 	//	printf("Zeroed tet element: %d\n", tets[0]);
 	testvariable = ft_12arr(tets, n * 4, 4);
-	printf("Unzeroed tet[2][1]: %d\n", testvariable[2][1]);
+	i = -1;
+	printf("Unzeroed tet[2]:");
+	while (++i < 4)	
+		printf(" %d ", testvariable[2][i]);
+	printf("\nZeroed tet[2]: ");
 	testvariable = fillit(testvariable, n);
-	printf("Zeroed tet[2][1]: %d\n", testvariable[2][1]);
+	i = -1;
+	while (++i < 4)	
+		printf(" %d ", testvariable[2][i]);
+	printf("\nIncremented tet[2]:");
+	increment_tet(testvariable[2], 4);
+	i = -1;
+	while (++i < 4)	
+		printf(" %d ", testvariable[2][i]);
+	printf("\nTwice incremented tet[2]:");
+	increment_tet(testvariable[2], 4);
+	i = -1;
+	while (++i < 4)	
+		printf(" %d ", testvariable[2][i]);
+	printf("\n");
 	return (0);
 }

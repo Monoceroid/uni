@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/01 14:54:32 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/02 11:42:10 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int		**fillit(int **a, int n)
 {
 	int	l;
 	int	init_l;
-	int	i;
-	int	j;
 
 	l = 4;
 	init_l = l;
@@ -27,17 +25,7 @@ int		**fillit(int **a, int n)
 		l++;
 	upsize_all(a, l, init_l, n);
 	zero_all(a, n, l);
-	i = 0;
-	while (++i < n)
-	{
-		j = 0;
-		while (i - (++j) >= 0)
-		{
-		while (ft_1ardif(a[i], a[i - j], 4, 4) != 1)
-			increment_tet(a[i], l);
-		}
-	}
-	return (a);
+	return (arrange(a, n, l, 0));
 }
 
 int		main(int argc, char **argv)
@@ -68,7 +56,7 @@ int		main(int argc, char **argv)
 	i = -1;
 	printf("Unzeroed tets:\n");
 	j = -1;
-	while (++j < 4)
+	while (++j < n)
 	{
 		while (++i < 4)
 			printf(" %d ", testvariable[j][i]);
@@ -79,7 +67,7 @@ int		main(int argc, char **argv)
 	i = -1;
 	j = -1;
 	printf("Cleared tets:\n");
-	while (++j < 4)
+	while (++j < n)
 	{
 		while (++i < 4)
 			printf(" %d ", testvariable[j][i]);

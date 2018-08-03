@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 11:07:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/03 10:41:48 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/03 14:38:50 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,32 +27,42 @@ int	compare_previous(int **a, int i)
 	return (1);
 }
 
+int	**clear_tet(int **a, int n, int l, int i)
+{
+	while (compare_previous(a, i) == 0)
+		increment_tet(a[i], l);
+	if (a[i][3] > l * l)
+	{
+//		if (i - 1 > 0 && a[i - 1][3] < l * l)
+//		{
+			increment_tet(a[i - 1], l);
+			zero_all(a + i, n - i, l);
+			arrange(a, n, l, i);
+//		}
+//		else if (i - 2 > 0 && a[i - 2][3] < l * l)
+//		{
+//			increment_tet(a[i - 2], l);
+//			zero_all(a + (i - 1), n - (i - 1), l);
+//			arrange(a, n, l, i - 1);
+//		}	
+//		else if (i - 3 > 0 && a[i - 3][3] < l * l)
+//		{
+//			increment_tet(a[i - 3], l);
+//			zero_all(a + (i - 2), n - (i - 2), l);
+//			arrange(a, n, l, i - 2);
+//		}	
+	}
+	return (a);
+}
+
 int	**arrange(int **a, int n, int l, int i)
 {
-	while (++i < n)
+	clear_tet(a, n, l, i);
+	if (a[0][3] > l * l)
 	{
-		while (compare_previous(a, i) == 0)
-			increment_tet(a[i], l);
-		printf("\na[%i][3]: %i", i, a[i][3]);
-		if (a[0][3] > l * l)
-		{
-			printf("\nI'm about to upsize.");
-			upsize_all(a, l + 1, l, n);
-			l++;
-			zero_all(a, n, l);
-		}
-		if (a[i][3] > l * l)
-		{
-	//		printf("\na[%i][3]: %i", i, a[i][3]);
-			i--;
-			increment_tet(a[i], l);
-			zero_all(a + i + 1, n - i - 1, l);
-	//		printf("\na[1][3]: %i", a[1][3]);
-	//		printf("\na[%i][3]: %i", i, a[i][3]);
-			i--;
-			printf("\nArrange n, l, i: %i %i %i", n, l, i);
-			arrange(a, n, l, i);
-		}
+		zero_all(a, n, l);
+		l++;
+		arrange(a, n, l, i);
 	}
 	return (a);
 }

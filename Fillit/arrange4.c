@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 11:07:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/05 11:38:13 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/05 12:03:18 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	clear_2(int **a, int n, int l)
 	while (compare_previous(a, 2) == 0)
 		increment_tet(a[2], l);
 //	printf("\nHere");
-	while (a[2][3] > l * l)
+	while (a[2][3] > l * l && a[1][0] < l * l + 1)
 	{
 		zero_all(a + 2, n - 2, l);
 		increment_tet(a[1], l);

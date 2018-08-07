@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/04 10:20:00 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/07 14:40:01 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		**fillit(int **a, int n)
 		l++;
 	upsize_all(a, l, init_l, n);
 	zero_all(a, n, l);
-	arrange(a, n, l, 1);
+	arrange(a, n, l, 0);
 //	arrange(a, n, l, 2);
 //	arrange(a, n, l, 3);
 	return (a);

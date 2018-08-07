@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 11:07:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/06 13:28:50 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/07 13:23:24 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,33 @@ void	clear_i(int **a, int n, int l, int i)
 		increment_tet(a[i], l);
 }
 
-int	**arrange(int **a, int n, int l, int i)
+int		**arrange(int **a, int n, int l, int i)
 {
-	i = 0;
+	int	j;
+	int	count;
 
+	count = 0;
 	while (++i < n)
 	{
-		while (compare_previous(a, i) == 0)
-			increment_tet(a[i], l);
-		while (a[i][3] > l * l)
-		{
-			printf("\nShouldn't go here.");
-			clear_i(a, n, l, i);
+		while (a[0][3] < l * l + 2 && count++ < l * l)
+		{	
+		//	printf("\ni: %i count: %i", i, count);
+			while (compare_previous(a, i) == 0)
+				increment_tet(a[i], l);
+			j = i + 1;
+			while (--j > 0)
+			{
+				while (a[j][3] > l * l && a[j - 1][3] < l * l + 2)
+				{
+					printf("\nj: %i", j);
+					clear_i(a, n, l, j);
+				}
+				if (a[j - 1][3] < l * l + 1)
+					break ;
+			}
 		}
+		count = 0;
 	}
+	printf("\nl: %d\n", l);
 	return (a);
 }

@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 11:07:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/10 10:18:02 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/10 15:03:33 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,37 @@ int		**arrange(int **a, int n, int l, int i)
 	int	j;
 	int	count;
 
-	count = 0;
 	while (++i < n)
 	{
+		count = 0;
 		while (a[0][3] < l * l + 2 && count++ < l * l)
-		{	
+		{
 		//	printf("\ni: %i count: %i", i, count);
-			while (compare_previous(a, i) == 0)
-				increment_tet(a[i], l);
+		//	while (compare_previous(a, i) == 0)
+		//		increment_tet(a[i], l);
 			j = i + 1;
 			while (--j > 0)
 			{
-				while (a[j][3] > l * l && a[j - 1][3] < l * l + 2)
+			//	printf("\ni: %i, j: %i", i, j);
+				zero_all(a + j, n - j, l);
+				while (compare_previous(a, j) == 0)
+					increment_tet(a[j], l);
+				printf("\na[%i][3]: %i", j, a[j][3]);
+				while (a[j][3] > l * l && a[j - 1][3] < l * l + 1)
 				{
 					printf("\nj: %i", j);
 					clear_i(a, n, l, j);
 				}
-				if (a[j - 1][3] < l * l + 1)
+				if (a[j - 1][3] < l * l + 1 && j == i)
 					break ;
+				printf("\nj: %i", j);
+				if (a[j - 1][3] < l * l + 1 && j < i)
+					j += 2;
+				printf("\na[0][3]: %i, l*l: %i, j: %i, i: %i: ", a[0][3], l * l, j, i);
+				if (a[j - 1][3] > l * l && j > 1)
+					increment_tet(a[j - 2], l);
 			}
 		}
-		count = 0;
 		if (a[0][3] > l * l)
 		{
 			zero_all(a, n, l);

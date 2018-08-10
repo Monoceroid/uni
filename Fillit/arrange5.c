@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 11:07:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/07 13:23:24 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/10 10:18:02 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ int		**arrange(int **a, int n, int l, int i)
 			}
 		}
 		count = 0;
+		if (a[0][3] > l * l)
+		{
+			zero_all(a, n, l);
+			upsize_all(a, l + 1, l, n);
+			l++;
+			i = 0;
+		}
 	}
 	printf("\nl: %d\n", l);
 	return (a);

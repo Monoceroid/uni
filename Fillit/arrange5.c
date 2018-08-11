@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 11:07:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/11 12:53:02 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/11 13:11:36 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ int		**arrange(int **a, int n, int l, int i)
 {
 	int	j;
 	int	count;
-	int	x;
-	int	y;
+//	int	x;
+//	int	y;
 
 	while (++i < n)
 	{
@@ -74,19 +74,19 @@ int		**arrange(int **a, int n, int l, int i)
 //					printf("\nj: %i", j);
 					clear_i(a, n, l, j);
 				}
-				if (i == 3)
-				{
-					printf("\nTets after j = %i loop:\n", j);
-					x = -1;
-					y = -1;
-					while (++x < n)
-					{
-						while (++y < 4)
-							printf(" %d ", a[x][y]);
-						printf("\n");
-						y = -1;
-					}
-				}
+//				if (i == 3)
+//				{
+//					printf("\nTets after j = %i loop:\n", j);
+//					x = -1;
+//					y = -1;
+//					while (++x < n)
+//					{
+//						while (++y < 4)
+//							printf(" %d ", a[x][y]);
+//						printf("\n");
+//						y = -1;
+//					}
+//				}
 				if (a[j - 1][3] < l * l + 1 && j == i)
 					break ;
 //				printf("\nj: %i", j);
@@ -97,16 +97,16 @@ int		**arrange(int **a, int n, int l, int i)
 					clear_i(a, n, l, j - 1);
 			}
 		}
-		printf("\nTets after i = %i loop:\n", i);
-		x = -1;
-		y = -1;
-		while (++x < n)
-		{
-			while (++y < 4)
-				printf(" %d ", a[x][y]);
-			printf("\n");
-			y = -1;
-		}
+//		printf("\nTets after i = %i loop:\n", i);
+//		x = -1;
+//		y = -1;
+//		while (++x < n)
+//		{
+//			while (++y < 4)
+//				printf(" %d ", a[x][y]);
+//			printf("\n");
+//			y = -1;
+//		}
 		if (a[0][3] > l * l)
 		{
 			zero_all(a, n, l);

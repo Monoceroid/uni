@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 11:07:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/10 15:03:33 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/11 12:53:02 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ int		**arrange(int **a, int n, int l, int i)
 {
 	int	j;
 	int	count;
+	int	x;
+	int	y;
 
 	while (++i < n)
 	{
@@ -66,21 +68,44 @@ int		**arrange(int **a, int n, int l, int i)
 				zero_all(a + j, n - j, l);
 				while (compare_previous(a, j) == 0)
 					increment_tet(a[j], l);
-				printf("\na[%i][3]: %i", j, a[j][3]);
-				while (a[j][3] > l * l && a[j - 1][3] < l * l + 1)
+//				printf("\na[%i][3]: %i", j, a[j][3]);
+				while (a[j][3] > l * l && a[j - 1][3] < l * l + 2)
 				{
-					printf("\nj: %i", j);
+//					printf("\nj: %i", j);
 					clear_i(a, n, l, j);
+				}
+				if (i == 3)
+				{
+					printf("\nTets after j = %i loop:\n", j);
+					x = -1;
+					y = -1;
+					while (++x < n)
+					{
+						while (++y < 4)
+							printf(" %d ", a[x][y]);
+						printf("\n");
+						y = -1;
+					}
 				}
 				if (a[j - 1][3] < l * l + 1 && j == i)
 					break ;
-				printf("\nj: %i", j);
+//				printf("\nj: %i", j);
 				if (a[j - 1][3] < l * l + 1 && j < i)
 					j += 2;
-				printf("\na[0][3]: %i, l*l: %i, j: %i, i: %i: ", a[0][3], l * l, j, i);
+//				printf("\na[0][3]: %i, l*l: %i, j: %i, i: %i: ", a[0][3], l * l, j, i);
 				if (a[j - 1][3] > l * l && j > 1)
-					increment_tet(a[j - 2], l);
+					clear_i(a, n, l, j - 1);
 			}
+		}
+		printf("\nTets after i = %i loop:\n", i);
+		x = -1;
+		y = -1;
+		while (++x < n)
+		{
+			while (++y < 4)
+				printf(" %d ", a[x][y]);
+			printf("\n");
+			y = -1;
 		}
 		if (a[0][3] > l * l)
 		{

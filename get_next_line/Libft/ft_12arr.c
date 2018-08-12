@@ -1,42 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_12arr.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/07/21 11:13:45 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/07/22 11:49:51 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+int	**ft_12arr(int *p, int m, int n)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
+	int	i;
+	int	j;
+	int	k;
+	int	**a;
 
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
-	int		i;
-
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	i = 0;
-	while (i < 10)
+	a = (int **)malloc(sizeof(int *) * (m / n));
+	a[0] = (int *)malloc(sizeof(int) * m);
+	i = -1;
+	while (++i < (m / n))
+		a[i] = a[0] + n * i;
+	i = -1;
+	k = 0;
+	while (++i < (m / n))
 	{
-		printf("%c", *line[i]);
-		i++;
+		j = 0;
+		while (j < n)
+		{
+			a[i][j] = p[k];
+			j++;
+			k++;
+		}
 	}
-	return (0);
+	free(p);
+	return (a);
 }

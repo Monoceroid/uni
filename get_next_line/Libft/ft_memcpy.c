@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/04/28 17:10:26 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/05/21 15:35:19 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
+	char	*dst2;
+	char	*src2;
+	size_t	i;
 
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
-	int		i;
-
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
+	dst2 = (char *)dst;
+	src2 = (char *)src;
 	i = 0;
-	while (i < 10)
+	while (i < n)
 	{
-		printf("%c", *line[i]);
+		dst2[i] = src2[i];
 		i++;
 	}
-	return (0);
+	return (dst);
 }

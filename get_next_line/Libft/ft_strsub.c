@@ -1,42 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/05/19 15:35:08 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/06/04 20:50:47 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
+	char			*t;
+	unsigned int	i;
 
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
-	int		i;
-
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
 	i = 0;
-	while (i < 10)
+	t = (char *)malloc(len + 1);
+	if (!s || !t)
+		return (NULL);
+	while (i < len)
 	{
-		printf("%c", *line[i]);
+		t[i] = s[start + i];
 		i++;
 	}
-	return (0);
+	t[i] = '\0';
+	return (t);
 }

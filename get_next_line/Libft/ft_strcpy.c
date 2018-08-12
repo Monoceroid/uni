@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/04/25 10:58:36 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/06/02 16:05:30 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
+	int	i;
 
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
-	int		i;
-
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
 	i = 0;
-	while (i < 10)
+	while (src[i] != '\0')
 	{
-		printf("%c", *line[i]);
+		dst[i] = src[i];
 		i++;
 	}
-	return (0);
+	dst[i] = '\0';
+	return (dst);
 }

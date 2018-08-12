@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_arrstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/07/18 10:27:57 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/07/18 15:15:32 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+int	*ft_arrstr(char *str, char c, int size)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
+	int	*p;
+	int	*p2;
 
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
-	int		i;
-
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	i = 0;
-	while (i < 10)
+	p = (int *)malloc(sizeof(int) * size);
+	p2 = p;
+	while (*str)
 	{
-		printf("%c", *line[i]);
-		i++;
+		if (*str >= '0' && *str <= '9' && *(str + 1) == c)
+			*p++ = *str - '0';
+		else if (*str >= '0' && *str <= '9')
+		{
+			*p++ = (*str - '0') * 10 + (*(str + 1) - '0');
+			str++;
+		}
+		str++;
 	}
-	return (0);
+	return (p2);
 }

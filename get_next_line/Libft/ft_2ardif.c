@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_2ardif.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/07/23 12:56:56 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/07/23 14:07:03 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+int	ft_2ardif(int **a, int r, int c)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
+	int res;
+	int x;
 
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
-	int		i;
-
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	i = 0;
-	while (i < 10)
+	res = 1;
+	x = 0;
+	if (r == 1)
+		return (res);
+	while (++x < r)
 	{
-		printf("%c", *line[i]);
-		i++;
+		if (ft_1ardif(*a, *(a + x), c, c) == 0)
+			res = 0;
 	}
-	return (0);
+	if (res == 0)
+		return (res);
+	else
+		res = ft_2ardif(a + 1, r - 1, c);
+	return (res);
 }

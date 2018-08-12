@@ -1,42 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/04/30 14:09:26 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/05/21 15:36:22 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+void	*ft_memmove(void *dst, const void *src, size_t n)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
+	char	*dst2;
+	char	*src2;
+	size_t	i;
 
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
-	int		i;
-
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
+	dst2 = (char *)dst;
+	src2 = (char *)src;
 	i = 0;
-	while (i < 10)
+	if (src2 < dst2)
 	{
-		printf("%c", *line[i]);
-		i++;
+		while (n--)
+			dst2[n] = src2[n];
 	}
-	return (0);
+	else
+		ft_memcpy(dst2, src2, n);
+	return (dst2);
 }

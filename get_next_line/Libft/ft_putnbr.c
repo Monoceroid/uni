@@ -1,42 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/04/16 16:35:21 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/05/21 17:47:43 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+static int	power(int a, int b)
 {
-	while (**line != '\n')
+	int c;
+
+	if (b == 0)
+		return (1);
+	c = a;
+	while (b > 1)
 	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
+		c = c * a;
+		b--;
 	}
-	return (1);
+	return (c);
 }
 
-int	main(int argc, char **argv)
+void		ft_putnbr(int n)
 {
-	char	**line;
-	int		fd;
-	int		i;
+	int o;
+	int i;
 
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	i = 0;
-	while (i < 10)
+	if (n == -2147483648)
 	{
-		printf("%c", *line[i]);
+		ft_putchar('-');
+		ft_putchar('2');
+		n = 147483648;
+	}
+	if (n < 0)
+	{
+		ft_putchar('-');
+		n = n * -1;
+	}
+	o = n;
+	i = 1;
+	while (o >= 10)
+	{
+		o = o / 10;
 		i++;
 	}
-	return (0);
+	while (--i >= 0)
+	{
+		ft_putchar((n / power(10, i)) % 10 + 48);
+	}
 }

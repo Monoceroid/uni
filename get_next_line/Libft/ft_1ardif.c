@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_1ardif.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/07/23 12:39:43 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/08/01 14:16:09 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+int	ft_1ardif(int *p, int *q, int n, int count)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
+	int	res;
+	int	x;
 
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
-	int		i;
-
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
-	i = 0;
-	while (i < 10)
+	res = 1;
+	if (p == q)
+		return(ft_1arrdif(p, n));
+	x = -1;
+	if (count == 0)
+		return (res);
+	while (++x < n)
 	{
-		printf("%c", *line[i]);
-		i++;
+		if (*p == *(q + x))
+			res = 0;
 	}
-	return (0);
+	if (res == 0)
+		return (res);
+	else
+		res = ft_1ardif(p + 1, q, n, count - 1);
+	return (res);
 }

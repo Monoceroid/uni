@@ -1,42 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/12 10:08:51 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/12 13:18:15 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/04/26 11:38:35 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/05/21 15:38:47 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-#include <stdio.h>
+#include <stdlib.h>
+#include "libft.h"
 
-int	get_next_line(const int fd, char **line)
+char	*ft_strdup(const char *s1)
 {
-	while (**line != '\n')
-	{
-		read(fd, *line, BUFF_SIZE);
-		*line++;
-	}
-	return (1);
-}
-
-int	main(int argc, char **argv)
-{
-	char	**line;
-	int		fd;
 	int		i;
+	char	*s2;
 
-	line = malloc(sizeof(char) * 1000);
-	fd = open(argv[1], O_RDONLY);
-	get_next_line(fd, line);
 	i = 0;
-	while (i < 10)
+	while (s1[i])
+		i++;
+	s2 = (char*)malloc(i + 1);
+	if (s2 == NULL)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		printf("%c", *line[i]);
+		s2[i] = s1[i];
 		i++;
 	}
-	return (0);
+	s2[i] = '\0';
+	return (s2);
 }

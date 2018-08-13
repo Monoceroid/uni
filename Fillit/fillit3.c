@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/07 14:40:01 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/13 11:34:30 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ int		**fillit(int **a, int n)
 {
 	int	l;
 	int	init_l;
+	int	*p;
 
 	l = 4;
+	p = &l;
 	init_l = l;
 	while (l * l < 4 * n)
 		l++;
 	upsize_all(a, l, init_l, n);
 	zero_all(a, n, l);
-	arrange(a, n, l, 0);
+	arrange(a, n, p, 0);
 //	arrange(a, n, l, 2);
 //	arrange(a, n, l, 3);
 	return (a);

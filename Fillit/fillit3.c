@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/13 11:34:30 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/13 14:23:56 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int		**fillit(int **a, int n)
 	upsize_all(a, l, init_l, n);
 	zero_all(a, n, l);
 	arrange(a, n, p, 0);
-//	arrange(a, n, l, 2);
-//	arrange(a, n, l, 3);
+	output(a, n, l);
 	return (a);
 }
 
@@ -38,8 +37,8 @@ int		main(int argc, char **argv)
 	int		*tets;
 	int		n;
 	int		**testvariable;
-	int		i;
-	int		j;
+//	int		i;
+//	int		j;
 
 	if (argc != 2)
 	{
@@ -53,32 +52,32 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	//	printf("%d\n", tets[16]);
-	printf("Number of tets: %d\n", n);
+	//	printf("Number of tets: %d\n", n);
 	//	printf("cdif1: %d\n", (tet_struct(tets, 4)).cdif1);
 	//	zero_tet(tets, 4);
 	//	printf("Zeroed tet element: %d\n", tets[0]);
 	testvariable = ft_12arr(tets, n * 4, 4);
-	i = -1;
-	printf("Unzeroed tets:\n");
-	j = -1;
-	while (++j < n)
-	{
-		while (++i < 4)
-			printf(" %d ", testvariable[j][i]);
-		printf("\n");
-		i = -1;
-	}
+//	i = -1;
+//	printf("Unzeroed tets:\n");
+//	j = -1;
+//	while (++j < n)
+//	{
+//		while (++i < 4)
+//			printf(" %d ", testvariable[j][i]);
+//		printf("\n");
+//		i = -1;
+//	}
 	testvariable = fillit(testvariable, n);
-	i = -1;
-	j = -1;
-	printf("Cleared tets:\n");
-	while (++j < n)
-	{
-		while (++i < 4)
-			printf(" %d ", testvariable[j][i]);
-		printf("\n");
-		i = -1;
-	}
+//	i = -1;
+//	j = -1;
+//	printf("Cleared tets:\n");
+//	while (++j < n)
+//	{
+//		while (++i < 4)
+//			printf(" %d ", testvariable[j][i]);
+//		printf("\n");
+//		i = -1;
+//	}
 //	printf("\nIncremented tet[2]:");
 //	increment_tet(testvariable[2], 4);
 //	i = -1;
@@ -89,6 +88,6 @@ int		main(int argc, char **argv)
 //	i = -1;
 //	while (++i < 4)
 //		printf(" %d ", testvariable[2][i]);
-	printf("\n");
+//	printf("\n");
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/01 11:07:52 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/13 11:26:11 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/13 11:55:43 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ c_tet	tet_struct(int *a, int l);
 void	increment_tet(int *t, int l);
 int		**arrange(int **a, int n, int *l, int i);
 void	decrement_tet(int *t, int l);
+void	output(int **a, int n, int l);
 
 #endif

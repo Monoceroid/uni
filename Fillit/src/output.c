@@ -6,13 +6,20 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/13 11:42:03 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/13 14:28:05 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/14 13:59:33 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
 #include <stdio.h>
+
+/*
+**	Mallocs an area the size of the square the tetriminos will fit in.
+**	Fills that area with '.'. Goes through the solution (a), writing each
+**	number as the appropriate letter in the appropriate place in the new
+**	area (b).  Writes b to standard output.
+*/
 
 void	output(int **a, int n, int l)
 {

@@ -6,13 +6,20 @@
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/02 11:07:57 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/08/13 14:27:08 by wtaylor          ###   ########.fr       */
+/*   Updated: 2018/08/14 14:01:08 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft.h"
 #include <stdio.h>
+
+/*
+**	Compares the ith tetrimino against all previous tetriminos (i.e. a[2] would
+**	be compared against a[1] and a[0]) using the libft function ft_1ardif, which
+**	compares two arrays to see if any element is the same, returning 0 if so and
+**	1 if all are different.
+*/
 
 int		compare_previous(int **a, int i)
 {
@@ -27,14 +34,10 @@ int		compare_previous(int **a, int i)
 	return (1);
 }
 
-//int		**clear_tet(int **a, int n, int l, int i)
-//{
-//	zero_all(a + i, n - i, l);
-//	increment_tet(a[i - 1], l);
-//	while (compare_previous(a, i) == 0)
-//		increment_tet(a[i], l);
-//	return (a);
-//}
+/*
+**	Increments the (i-1)th tetrimino, moves it clear of any previous tetriminos,
+**	then moves the ith tetrimino clear.
+*/
 
 void	clear_i(int **a, int n, int l, int i)
 {
@@ -46,67 +49,53 @@ void	clear_i(int **a, int n, int l, int i)
 		increment_tet(a[i], l);
 }
 
+/*
+**	This is where the core fillit algorithm is. The outermost loop does the
+**	operation on each tetrimino. The next loop in ends when the 0th tetrimino
+**	has exceeded the limits of the current square, in which case we increase
+**	the size of the square, or when we have repeated the operation enough times
+**	that we can be sure the 0th tetrimino is not going to exceed the limits
+**	(i.e. whichever tetrimino we are working on, and all previous ones, have
+**	found a place inside the square). The innermost loop uses the variable j,
+**	which is initially a copy of i. We start by moving the tetrimino we are
+**	working on clear of previous tetriminos. If its last element has exceeded
+**	the bounds of the square, we call 'clear_i', which increments the previous
+**	tetrimino by 1, then tries to find a place for both tetriminos. If this
+**	process ends up with that earlier tetrimino exceeding the bounds of the
+**	square, we call 'clear_i' again for the tetrimino before it, and so on.
+**	If at any point both the ith tetrimino and the previous one are within
+**	the bounds of the square, we break out of the loop, ready to move on to
+**	the next tetrimino. If the jth tetrimino and the previous one are within
+**	the square, we increase j again, aiming to get the ith tetrimino (the one
+**	we were working on when we entered the loop) inside the square.
+*/
+
 int		**arrange(int **a, int n, int *l, int i)
 {
 	int	j;
 	int	count;
-//	int	x;
-//	int	y;
 
 	while (++i < n)
 	{
 		count = 0;
 		while (a[0][3] < *l * *l + 2 && count++ < *l * *l)
 		{
-		//	printf("\ni: %i count: %i", i, count);
-		//	while (compare_previous(a, i) == 0)
-		//		increment_tet(a[i], *l);
 			j = i + 1;
 			while (--j > 0)
 			{
-			//	printf("\ni: %i, j: %i", i, j);
 				zero_all(a + j, n - j, *l);
 				while (compare_previous(a, j) == 0)
 					increment_tet(a[j], *l);
-//				printf("\na[%i][3]: %i", j, a[j][3]);
 				while (a[j][3] > *l * *l && a[j - 1][3] < *l * *l + 2)
-				{
-//					printf("\nj: %i", j);
 					clear_i(a, n, *l, j);
-				}
-//				if (i == 3)
-//				{
-//					printf("\nTets after j = %i loop:\n", j);
-//					x = -1;
-//					y = -1;
-//					while (++x < n)
-//					{
-//						while (++y < 4)
-//							printf(" %d ", a[x][y]);
-//						printf("\n");
-//						y = -1;
-//					}
-//				}
 				if (a[j - 1][3] < *l * *l + 1 && j == i)
 					break ;
-//				printf("\nj: %i", j);
 				if (a[j - 1][3] < *l * *l + 1 && j < i)
 					j += 2;
-//				printf("\na[0][3]: %i, *l * *l: %i, j: %i, i: %i: ", a[0][3], *l * *l, j, i);
 				if (a[j - 1][3] > *l * *l && j > 1)
 					clear_i(a, n, *l, j - 1);
 			}
 		}
-//		printf("\nTets after i = %i loop:\n", i);
-//		x = -1;
-//		y = -1;
-//		while (++x < n)
-//		{
-//			while (++y < 4)
-//				printf(" %d ", a[x][y]);
-//			printf("\n");
-//			y = -1;
-//		}
 		if (a[0][3] > *l * *l)
 		{
 			zero_all(a, n, *l);
@@ -115,6 +104,5 @@ int		**arrange(int **a, int n, int *l, int i)
 			i = 0;
 		}
 	}
-//	printf("\nl: %d\n", *l);
 	return (a);
 }

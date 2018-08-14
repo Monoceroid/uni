@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   store_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wtaylor <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/06/07 18:59:11 by wtaylor           #+#    #+#             */
-/*   Updated: 2018/07/20 10:40:24 by wtaylor          ###   ########.fr       */
+/*   Created: 2018/07/31 10:22:50 by wtaylor           #+#    #+#             */
+/*   Updated: 2018/08/14 14:23:13 by wtaylor          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <stdio.h>
+#include "fillit.h"
 
-int	*valid_tets(void)
+/*
+**	String s contains all possible valid tetriminos. Each number represents the
+**	position of a #. For example:
+**	..#.
+**	..#.
+**	.##.
+**	....	would be represented as 3,7,10,11.
+**	Libft function ft_arrstr is called to  convert the character string to an
+**	integer array.
+*/
+
+static	int	*valid_tets(void)
 {
 	char	*s;
 	int		*tets;
@@ -42,7 +50,24 @@ int	*valid_tets(void)
 	return (tets);
 }
 
-int	*store_check(int fd, int *actual)
+/*
+**	Reads through file, keeping track of the position with 'pos' and writing
+**	that number to the area pointed to by 'actual' when a # is encountered.
+**	'acount' keeps track of how far we have moved the pointer 'actual' so that
+**	it can be reset when we are ready to look through the memory area again.
+**	We then look through the memory area pointed to by 'actual', which now
+**	contains a representation of all the tetriminos in the file, and compare
+**	it against the area pointed to by 'valid', which contains all the valid
+**	tetriminos. We always look at four consecutive integers and increment by
+**	four, as we want to look at whole tetriminos. We reuse the variable 'pos'
+**	as an indicator of whether or not all the tetriminos have found a match
+**	within valid. 'pos' is set to 0 at the start of each loop, and is set to
+**	1 when we match that tetrimino. If it is 1 at the end of the process,
+**	we know the file is valid. If it is 0 after any tetrimino has been looked
+**	for, we know the file is invalid and return NULL.
+*/
+
+static	int	*store_check(int fd, int *actual)
 {
 	char	buffer;
 	int		pos;
@@ -97,73 +122,84 @@ int	*store_check(int fd, int *actual)
 	return (actual);
 }
 
-int	*check_count(int fd)
-{
-	char	buffer;
-	int		pos;
-	int		lines;
-	int		*arr;
-	int		hash;
+/*
+**	Performs an initial check of the input file, returning 0 if there
+**	are any forbidden/misplaced characters or if there are not the right
+**	number of hashes in each tetrimino. Returns 1 if those tests are passed.
+*/
 
-	buffer = 'a';
-	hash = 0;
-	pos = 0;
-	lines = 0;
+static	int	initial_check(int fd, char buffer, int hash, int pos)
+{
 	while (read(fd, &buffer, 1) != 0)
 	{
 		pos++;
 		if (pos % 5 != 0 && pos != 21)
 		{
 			if (buffer != '.' && buffer != '#')
-				return (NULL);
+				return (0);
 			if (buffer == '#')
 				hash++;
 		}
 		else
 		{
 			if (buffer != '\n')
-				return (NULL);
+				return (0);
 		}
 		if (pos == 21)
 		{
-			lines += 4;
 			if (hash != 4)
-				return (NULL);
+				return (0);
 			pos = 0;
 			hash = 0;
 		}
 	}
-	arr = (int *)malloc((lines + 1) * sizeof(int));
-	return (arr);
+	return (1);
 }
 
-int	main(int argc, char **argv)
-{
-	int		fd;
-	int		*arr;
-	int		*tets;
+/*
+**	Counts the number of tetriminos, modifying that number via a pointer
+**	so it is available elsewhere, and returns a pointer to an array the
+**	right size to store the tetriminos in.
+*/
 
-	if (argc != 2)
+static	int	*count(int fd, int *n, char **argv)
+{
+	char	buffer;
+	int		pos;
+
+	pos = 0;
+	while (read(fd, &buffer, 1) != 0)
 	{
-		ft_putstr("usage: fillit file_name");
-		return (0);
-	}
-	fd = open(argv[1], O_RDONLY);
-	if ((arr = check_count(fd)) == NULL)
-	{
-		ft_putstr("error");
-		ft_putchar('\n');
-		return (0);
+		pos++;
+		if (pos == 21)
+		{
+			(*n)++;
+			pos = 0;
+		}
 	}
 	close(fd);
 	fd = open(argv[1], O_RDONLY);
-	if ((tets = store_check(fd, arr)) == NULL)
-	{
-		ft_putstr("error");
-		ft_putchar('\n');
-		return (0);
-	}
-	printf("%d\n", tets[16]);
+	if (initial_check(fd, 'a', 0, 0) == 0)
+		return (NULL);
+	else
+		return ((int *)malloc((*n * 4 + 1) * sizeof(int)));
+}
+
+/*
+**	Opens and closes the input file, getting a file descriptor which is fed
+**	to the other functions in this file.
+*/
+
+int			*validate(int *n, char **argv)
+{
+	int	fd;
+	int	*arr;
+
+	fd = open(argv[1], O_RDONLY);
+	arr = count(fd, n, argv);
+	if (arr == NULL)
+		return (arr);
 	close(fd);
-	return (0);
+	fd = open(argv[1], O_RDONLY);
+	return (store_check(fd, arr));
 }

@@ -70,39 +70,44 @@ void	clear_i(int **a, int n, int l, int i)
 **	we were working on when we entered the loop) inside the square.
 */
 
-int		**arrange(int **a, int n, int *l, int i)
+void    enlarge_box(int **a, int n, int *l, int i)
 {
-	int	j;
-	int	count;
+    if (a[0][3] > *l * *l)
+    {
+        zero_all(a, n, *l);
+        upsize_all(a, *l + 1, *l, n);
+        (*l)++;
+        i = 0;
+    }
+}
 
-	while (++i < n)
-	{
-		count = 0;
-		while (a[0][3] < *l * *l + 2 && count++ < *l * *l)
-		{
-			j = i + 1;
-			while (--j > 0)
-			{
-				zero_all(a + j, n - j, *l);
-				while (compare_previous(a, j) == 0)
-					increment_tet(a[j], *l);
-				while (a[j][3] > *l * *l && a[j - 1][3] < *l * *l + 2)
-					clear_i(a, n, *l, j);
-				if (a[j - 1][3] < *l * *l + 1 && j == i)
-					break ;
-				if (a[j - 1][3] < *l * *l + 1 && j < i)
-					j += 2;
-				if (a[j - 1][3] > *l * *l && j > 1)
-					clear_i(a, n, *l, j - 1);
-			}
-		}
-		if (a[0][3] > *l * *l)
-		{
-			zero_all(a, n, *l);
-			upsize_all(a, *l + 1, *l, n);
-			(*l)++;
-			i = 0;
-		}
-	}
-	return (a);
+int     **arrange(int **a, int n, int *l, int i)
+{
+    int j;
+    int count;
+
+    while (++i < n)
+    {
+        count = 0;
+        while (a[0][3] < *l * *l + 2 && count++ < *l * *l)
+        {
+            j = i + 1;
+            while (--j > 0)
+            {
+                zero_all(a + j, n - j, *l);
+                while (compare_previous(a, j) == 0)
+                    increment_tet(a[j], *l);
+                while (a[j][3] > *l * *l && a[j - 1][3] < *l * *l + 2)
+                    clear_i(a, n, *l, j);
+                if (a[j - 1][3] < *l * *l + 1 && j == i)
+                    break ;
+                if (a[j - 1][3] < *l * *l + 1 && j < i)
+                    j += 2;
+                if (a[j - 1][3] > *l * *l && j > 1)
+                    clear_i(a, n, *l, j - 1);
+            }
+        }
+        enlarge_box(a, n, l, i);
+    }
+    return (a);
 }

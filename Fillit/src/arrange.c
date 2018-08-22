@@ -70,19 +70,8 @@ void	clear_i(int **a, int n, int l, int i)
 **	we were working on when we entered the loop) inside the square.
 */
 
-void    enlarge_box(int **a, int n, int *l, int i)
-{
-    if (a[0][3] > *l * *l)
-    {
-        zero_all(a, n, *l);
-        upsize_all(a, *l + 1, *l, n);
-        (*l)++;
-        i = 0;
-    }
-}
-
 int     **arrange(int **a, int n, int *l, int i)
-{
+{   
     int j;
     int count;
 
@@ -107,7 +96,12 @@ int     **arrange(int **a, int n, int *l, int i)
                     clear_i(a, n, *l, j - 1);
             }
         }
-        enlarge_box(a, n, l, i);
+        if (a[0][3] > *l * *l)
+        {
+            zero_all(a, n, *l);
+            upsize_all(a, *l + 1, *l, n);
+            (*l)++;
+            i = 0;
+        }   
     }
     return (a);
-}
